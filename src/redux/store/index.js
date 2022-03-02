@@ -6,6 +6,9 @@ export const initialState = {
   cart: {
     products: [],
   },
+  user: {
+    name: '',
+  },
 }
 
 export const configureStore = createStore(

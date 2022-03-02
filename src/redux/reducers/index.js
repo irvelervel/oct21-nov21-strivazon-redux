@@ -1,4 +1,4 @@
-import { ADD_TO_CART, REMOVE_FROM_CART } from '../actions'
+import { ADD_TO_CART, REMOVE_FROM_CART, SET_USER_NAME } from '../actions'
 import { initialState } from '../store'
 
 // let's write our reducer! :)
@@ -34,7 +34,16 @@ const mainReducer = (state = initialState, action) => {
             ...state.cart.products.slice(0, action.payload),
             ...state.cart.products.slice(action.payload + 1),
           ],
-          // SPLICE ISN'T THOUGH, IT MUTATES THE CART :(
+          // SPLICE DOESN'T THOUGH, IT MUTATES THE CART :(
+        },
+      }
+
+    case SET_USER_NAME:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          name: action.payload,
         },
       }
 

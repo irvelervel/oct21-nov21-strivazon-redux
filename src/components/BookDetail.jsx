@@ -4,7 +4,9 @@ import Button from 'react-bootstrap/Button'
 import { connect } from 'react-redux'
 import { addToCartAction } from '../redux/actions'
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = (state) => ({
+  userName: state.user.name,
+})
 
 const mapDispatchToProps = (dispatch) => ({
   // here we're going to write method for DISPATCHING ACTIONS in BookDetail
@@ -56,12 +58,18 @@ class BookDetail extends Component {
                   <span className='font-weight-bold'>Price:</span>
                   {this.state.book.price}
                 </p>
-                <Button
-                  color='primary'
-                  onClick={() => this.props.addToCart(this.state.book)}
-                >
-                  ADD TO CART
-                </Button>
+                {/* I want to hide the button from a non-loggedin user */}
+                {/* has_the_user_logged_in ? show_button : show_message */}
+                {this.props.userName ? (
+                  <Button
+                    color='primary'
+                    onClick={() => this.props.addToCart(this.state.book)}
+                  >
+                    ADD TO CART
+                  </Button>
+                ) : (
+                  <div>You need to log in for purchasing this book!</div>
+                )}
               </Col>
             </Row>
           </>
