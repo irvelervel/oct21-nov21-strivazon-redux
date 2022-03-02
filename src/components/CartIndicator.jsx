@@ -10,6 +10,8 @@ const mapStateToProps = (state) => ({
   cartLength: state.cart.products.length,
 })
 
+// const mapStateToProps = (state) => state
+
 const CartIndicator = (props) => {
   const navigate = useNavigate()
 
