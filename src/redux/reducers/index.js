@@ -1,9 +1,10 @@
+import { ADD_TO_CART, REMOVE_FROM_CART } from '../actions'
 import { initialState } from '../store'
 
 // let's write our reducer! :)
 const mainReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'ADD_TO_CART':
+    case ADD_TO_CART:
       return {
         // let's return the new state object!
         ...state,
@@ -16,6 +17,24 @@ const mainReducer = (state = initialState, action) => {
           // THE ABOVE ONE IS ALLOWED
           // products: state.cart.products.concat(action.payload)
           // ALSO THIS ONE
+        },
+      }
+
+    case REMOVE_FROM_CART:
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          // FILTER WORKS!
+          //   products: state.cart.products.filter(
+          //     (book, i) => i !== action.payload
+          //   ),
+          // ALSO SLICE :D
+          products: [
+            ...state.cart.products.slice(0, action.payload),
+            ...state.cart.products.slice(action.payload + 1),
+          ],
+          // SPLICE ISN'T THOUGH, IT MUTATES THE CART :(
         },
       }
 
